@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .wrapper {
     display: flex;
     height: 100%;
@@ -18,11 +22,12 @@
     height: 95%;
     margin: auto;
     display: flex;
+    overflow: hidden;
 }
 
 .left-side {
-    width: 50%;
     background-color: #f3f4f6;
+    width: 50%;
     text-align: center;
 }
 
@@ -31,7 +36,7 @@
 }
 
 .stats-container {
-    background-color: lightgray;
+    background-color: white;
     border-radius: 15px;
     padding: 1rem;
     display: flex;
@@ -90,9 +95,13 @@
     outline: none;
     font-size: 42px;
     font-weight: bold;
-    width: 80%;
+    width: 85%;
     color: gray;
     text-align: center;
+}
+
+.input-amount-container input:focus::placeholder {
+    color: transparent;
 }
 
 .buttons-container {
@@ -108,7 +117,7 @@
     border-radius: 16px;
     padding: 11px;
     background: none;
-    width: 27%;
+    width: 29%;
 }
 
 .inputs-container {
