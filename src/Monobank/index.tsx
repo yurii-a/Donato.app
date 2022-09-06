@@ -2,12 +2,14 @@ import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import { jarContractAddr } from '../constants';
 import { CryptoMono__factory } from '../typechain';
+import { FaEthereum } from 'react-icons/fa';
 import './style.css';
 declare var window: any;
 
 function Monobank() {
+
     const [account, setAccount] = useState('');
-    const [amountToDonate, setAmountToDonate] = useState(0);
+    const [amountToDonate, setAmountToDonate] = useState<string | number>('0');
     const [raisedBalance, setRaisedBalance] = useState(0);
     const [targetBalance, setTargetBalance] = useState(0);
 
@@ -68,8 +70,9 @@ function Monobank() {
         <div className="wrapper">
             <div className='monobank-container'>
                 <div className='left-side'>
-                    <h3>Donato</h3>
-                    <img src='./images/jar.png'></img>
+                    <h3 style={{ margin: '30px 0 45px 0' }}>Crypto Jar</h3>
+                    <img
+                        src='./images/jar.png'></img>
                     <p className='name'>Сергій С. збирає</p>
                     <h2>На 100 коптерів!</h2>
                     <p>Збираємо на...</p>
@@ -78,7 +81,7 @@ function Monobank() {
                             <img src='./images/collected.svg'></img>
                             <div>
                                 <p className='amount-title'>Накопичено</p>
-                                <p className='money-amount'>{raisedBalance} $</p>
+                                <p className='money-amount'>{raisedBalance} <FaEthereum /></p>
                             </div>
                         </div>
                         <div className='vertical-line'></div>
@@ -86,23 +89,40 @@ function Monobank() {
                             <img src='./images/target.svg'></img>
                             <div>
                                 <p className='amount-title'>Ціль</p>
-                                <p className='money-amount'>{targetBalance} $</p>
+                                <p className='money-amount'>{targetBalance} <FaEthereum /></p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className='right-side'>
                     <div className='input-amount-container'>
-                        <h4 style={{ margin: '30px' }}>Сума поповнення</h4>
+                        <h4 style={{ margin: '30px' }}>Сума поповнення <FaEthereum />
+                        </h4>
                         <input
-                            placeholder='0$'
+                            value={amountToDonate}
+                            placeholder={amountToDonate + ' ETH'}
                             type='text'
-                            onChange={(event) => setAmountToDonate(Number(event.target.value))}
+                            onChange={(event) => setAmountToDonate(event.target.value)}
                         ></input>
                         <div className='buttons-container'>
-                            <button>+100 $</button>
-                            <button>+500 $</button>
-                            <button>+1 000 $</button>
+                            <button
+                                onClick={
+                                    () => setAmountToDonate(prevState => Number(prevState) + 1)
+                                }>
+                                +1 <FaEthereum />
+                            </button>
+                            <button
+                                onClick={
+                                    () => setAmountToDonate(prevState => Number(prevState) + 5)
+                                }>
+                                +5 <FaEthereum />
+                            </button>
+                            <button
+                                onClick={
+                                    () => setAmountToDonate(prevState => Number(prevState) + 10)
+                                }>
+                                +10 <FaEthereum />
+                            </button>
                         </div>
                     </div>
                     <div className='inputs-container'>
@@ -122,7 +142,7 @@ function Monobank() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
