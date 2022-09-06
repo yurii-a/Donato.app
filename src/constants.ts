@@ -1,0 +1,1 @@
+export const jarContractAddr = '0x879C86A793CF83d2367Fd5D46145c156Aa3B784d'; // rinkeby

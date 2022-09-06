@@ -1,6 +1,69 @@
+import { ethers } from 'ethers';
+import { useEffect, useState } from 'react';
+import { jarContractAddr } from '../constants';
+import { CryptoMono__factory } from '../typechain';
 import './style.css';
+declare var window: any;
 
 function Monobank() {
+    const [account, setAccount] = useState('');
+    const [amountToDonate, setAmountToDonate] = useState(0);
+    const [raisedBalance, setRaisedBalance] = useState(0);
+    const [targetBalance, setTargetBalance] = useState(0);
+
+    const { ethereum } = window;
+    const provider = new ethers.providers.Web3Provider(ethereum);
+    const signer = provider.getSigner();
+    const jarContract = CryptoMono__factory.connect(jarContractAddr, signer);
+
+    const addFund = async () => {
+        try {
+            const amount = ethers.utils.parseEther(amountToDonate.toString());
+            await jarContract.addFund({ value: amount });
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const checkIfWalletIsConnected = async () => {
+        try {
+            const accounts = await ethereum.request({ method: "eth_accounts" });
+            if (accounts.length !== 0) {
+                const account = accounts[0];
+                console.log("Found an authorized account:", account);
+                setAccount(account);
+            } else {
+                console.log("No authorized account found")
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const connectWallet = async () => {
+        try {
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+            console.log('Account addr: ', accounts[0]);
+            setAccount(accounts.length ? accounts[0] : '');
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    const getBalances = async () => {
+        const raisedBalance = await provider.getBalance(jarContractAddr);
+        const targetBalance = await jarContract.target();
+        console.log('Raised balance: ', Number(raisedBalance));
+        console.log('Targer balance: ', Number(targetBalance));
+        setRaisedBalance(Number(raisedBalance) / Math.pow(10, 18));
+        setTargetBalance(Number(targetBalance) / Math.pow(10, 18));
+    };
+
+    useEffect(() => {
+        checkIfWalletIsConnected();
+        getBalances();
+    }, []);
+
     return (
         <div className="wrapper">
             <div className='monobank-container'>
@@ -15,7 +78,7 @@ function Monobank() {
                             <img src='./images/collected.svg'></img>
                             <div>
                                 <p className='amount-title'>Накопичено</p>
-                                <p className='money-amount'>4 640 643 $</p>
+                                <p className='money-amount'>{raisedBalance} $</p>
                             </div>
                         </div>
                         <div className='vertical-line'></div>
@@ -23,7 +86,7 @@ function Monobank() {
                             <img src='./images/target.svg'></img>
                             <div>
                                 <p className='amount-title'>Ціль</p>
-                                <p className='money-amount'>9 300 000 $</p>
+                                <p className='money-amount'>{targetBalance} $</p>
                             </div>
                         </div>
                     </div>
@@ -34,6 +97,7 @@ function Monobank() {
                         <input
                             placeholder='0$'
                             type='text'
+                            onChange={(event) => setAmountToDonate(Number(event.target.value))}
                         ></input>
                         <div className='buttons-container'>
                             <button>+100 $</button>
@@ -50,7 +114,11 @@ function Monobank() {
                             placeholder="Коментар (необв'язково)"
                             type='text'
                         ></input>
-                        <button>Pay with Metamask</button>
+                        <button onClick={!account ?
+                            () => connectWallet() :
+                            () => addFund()}>
+                            {!account ? 'Connect wallet' : 'Pay with Metamask'}
+                        </button>
                     </div>
                 </div>
             </div>
