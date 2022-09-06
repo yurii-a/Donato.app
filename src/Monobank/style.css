@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    font-family: Inter;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.monobank-container {
+    background-color: white;
+    border-radius: 15px;
+    width: 70%;
+    height: 95%;
+    margin: auto;
+    display: flex;
+}
+
+.left-side {
+    width: 50%;
+    background-color: #f3f4f6;
+    text-align: center;
+}
+
+.name {
+    font-size: smaller;
+}
+
+.stats-container {
+    background-color: lightgray;
+    border-radius: 15px;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin: auto;
+}
+
+.vertical-line {
+    border-left: 1px solid gray;
+    height: 50px;
+}
+
+.stats-side {
+    width: 45%;
+    display: flex;
+}
+
+.stats-side div {
+    margin-left: 1rem;
+}
+
+.amount-title,
+.money-amount {
+    margin: 0;
+    text-align: left;
+    font-weight: bold;
+}
+
+.amount-title {
+    color: gray;
+    font-weight: lighter;
+    margin-bottom: 7px;
+}
+
+.left-side h3 {
+    text-transform: uppercase;
+}
+
+
+.right-side {
+    width: 50%;
+}
+
+.input-amount-container {
+    margin: 20px;
+    border: 3px solid purple;
+    text-align: center;
+    border-radius: 16px;
+    margin: 25px;
+}
+
+.input-amount-container input {
+    border: none;
+    outline: none;
+    font-size: 42px;
+    font-weight: bold;
+    width: 80%;
+    color: gray;
+    text-align: center;
+}
+
+.buttons-container {
+    width: 66%;
+    display: flex;
+    justify-content: space-between;
+    margin: 30px auto;
+}
+
+.buttons-container button {
+    border: 2px solid lightgray;
+    font-weight: bolder;
+    border-radius: 16px;
+    padding: 11px;
+    background: none;
+    width: 27%;
+}
+
+.inputs-container {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin: 2rem auto;
+    height: 240px;
+    justify-content: space-between;
+}
+
+.inputs-container * {
+    border-radius: 10px;
+    border: 1px solid gray;
+    height: 60px;
+    outline: none;
+    background: none;
+    padding: 10px;
+}
+
+.inputs-container button {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
