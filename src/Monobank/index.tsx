@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import { jarContractAddr } from '../constants';
-import { CryptoMono__factory } from '../typechain';
+// import { CryptoMono__factory } from '../typechain';
 import { FaEthereum } from 'react-icons/fa';
 import './style.css';
 declare var window: any;
@@ -16,12 +16,12 @@ function Monobank() {
     const { ethereum } = window;
     const provider = new ethers.providers.Web3Provider(ethereum);
     const signer = provider.getSigner();
-    const jarContract = CryptoMono__factory.connect(jarContractAddr, signer);
+    // const jarContract = CryptoMono__factory.connect(jarContractAddr, signer);
 
     const addFund = async () => {
         try {
             const amount = ethers.utils.parseEther(amountToDonate.toString());
-            await jarContract.addFund({ value: amount });
+            // await jarContract.addFund({ value: amount });
         } catch (e) {
             console.log(e);
         }
@@ -54,11 +54,12 @@ function Monobank() {
 
     const getBalances = async () => {
         const raisedBalance = await provider.getBalance(jarContractAddr);
-        const targetBalance = await jarContract.target();
+        const targetBalance = 10000;
+        // await jarContract.target();
         console.log('Raised balance: ', Number(raisedBalance));
         console.log('Targer balance: ', Number(targetBalance));
-        setRaisedBalance(Number(raisedBalance) / Math.pow(10, 18));
-        setTargetBalance(Number(targetBalance) / Math.pow(10, 18));
+        // setRaisedBalance(Number(raisedBalance) / Math.pow(10, 18));
+        // setTargetBalance(Number(targetBalance) / Math.pow(10, 18));
     };
 
     useEffect(() => {
@@ -127,11 +128,11 @@ function Monobank() {
                     </div>
                     <div className='inputs-container'>
                         <input
-                            placeholder="Ваше ім'я (необв'язково)"
+                            placeholder="Ваше ім'я (необов'язково)"
                             type='text'
                         ></input>
                         <input
-                            placeholder="Коментар (необв'язково)"
+                            placeholder="Коментар (необов'язково)"
                             type='text'
                         ></input>
                         <button onClick={!account ?
