@@ -82,7 +82,8 @@ function Monobank() {
                             <img src='./images/collected.svg'></img>
                             <div>
                                 <p className='amount-title'>Накопичено</p>
-                                <p className='money-amount'>{raisedBalance} <FaEthereum /></p>
+                                {/* <p className='money-amount'> {raisedBalance}  <FaEthereum /></p> */}
+                                <p className='money-amount'> 1000 <FaEthereum /></p>
                             </div>
                         </div>
                         <div className='vertical-line'></div>
@@ -90,7 +91,8 @@ function Monobank() {
                             <img src='./images/target.svg'></img>
                             <div>
                                 <p className='amount-title'>Ціль</p>
-                                <p className='money-amount'>{targetBalance} <FaEthereum /></p>
+                                {/* <p className='money-amount'>{targetBalance} <FaEthereum /></p> */}
+                                <p className='money-amount'>10 000 <FaEthereum /></p>
                             </div>
                         </div>
                     </div>
@@ -135,11 +137,18 @@ function Monobank() {
                             placeholder="Коментар (необов'язково)"
                             type='text'
                         ></input>
+                        <button style={{ marginTop: '16px', marginBottom: '16px' }} onClick={
+                            () => connectWallet() }>
+                            { 'Pay with Binance'}
+                        </button>
+
                         <button onClick={!account ?
                             () => connectWallet() :
                             () => addFund()}>
                             {!account ? 'Connect wallet' : 'Pay with Metamask'}
                         </button>
+                        {/* <data android:host="app.binance.com" android:scheme="https"/> */}
+                        <a href="intent://qr/dplk5354bef1ed4d4832960aa7e61989d71d/#Intent;scheme=https;package=com.binance.dev;end"> Pay with deeplink </a>
                     </div>
                 </div>
             </div>
