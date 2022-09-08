@@ -129,14 +129,14 @@ function Monobank() {
                         </div>
                     </div>
                     <div className='inputs-container'>
-                        <input
+                        {/* <input
                             placeholder="Ваше ім'я (необов'язково)"
                             type='text'
                         ></input>
                         <input
                             placeholder="Коментар (необов'язково)"
                             type='text'
-                        ></input>
+                        ></input> */}
                         <button style={{ marginTop: '16px', marginBottom: '16px' }} onClick={
                             () => connectWallet() }>
                             { 'Pay with Binance'}
