@@ -148,7 +148,7 @@ function Monobank() {
                             {!account ? 'Connect wallet' : 'Pay with Metamask'}
                         </button>
                         {/* <data android:host="app.binance.com" android:scheme="https"/> */}
-                        <a href="intent://qr/dplk5354bef1ed4d4832960aa7e61989d71d/#Intent;scheme=https;package=com.binance.dev;end"> Pay with deeplink </a>
+                        <a className='btn btn-primary' href="intent://app.binance.com/qr/dplk5354bef1ed4d4832960aa7e61989d71d#Intent;scheme=https;package=com.binance.dev;end"> Pay with Binance </a>
                     </div>
                 </div>
             </div>
